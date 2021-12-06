@@ -135,7 +135,7 @@ int RISC_V_Compile(QString FilePath)
     else
         report.Flages[File_state] = Report_Error;
 
-    QStringList Result_Code;
+    QStringList Result_Code_List;
     if(report.Next_Flage()<=0){   // 开始编译
 
         QByteArray array;
@@ -155,7 +155,7 @@ int RISC_V_Compile(QString FilePath)
               }
               else
               {
-                Result_Code.append(BitCode);
+                Result_Code_List.append(BitCode);
               }
 
             line_num += 1;
@@ -171,10 +171,18 @@ int RISC_V_Compile(QString FilePath)
        QString Compiled_FilePath = FilePath.replace(".s",".o");
        QFile Compiled_file(Compiled_FilePath);
        Compiled_file.open(QIODevice::WriteOnly);
-       for(int i = 0;i<Result_Code.size();i++)
+       uint32_t Content_Index = 0;
+       for(int i = 0;i<Result_Code_List.size();i++)
        {
-          Compiled_file.write(Result_Code.at(i).toUtf8());
+          Compiled_file.write("\t");
+          Compiled_file.write(QString().number(Content_Index).toUtf8());
+          Compiled_file.write("     :   ");
+
+          Compiled_file.write(Result_Code_List.at(i).toUtf8());
+
+          Compiled_file.write(";");
           Compiled_file.write("\n");
+          Content_Index++;
        }
 
     }
