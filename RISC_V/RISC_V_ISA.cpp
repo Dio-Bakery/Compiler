@@ -1,7 +1,8 @@
 #include "RISC_V_ISA.h"
 
-QVector <QString> R_Type_ISA_List = {"add", "sub", "sll", "slt", "sltu", "xor", "srl", "sra", "or", "and"};
+// *** R_Type *** begin *** //
 
+QVector <QString> R_Type_ISA_List = {"add", "sub", "sll", "slt", "sltu", "xor", "srl", "sra", "or", "and"};
 
 QVector <QString> R_Type_BitCode_List = {
 /*
@@ -40,3 +41,55 @@ QVector <QString> R_Type_BitCode_List = {
     "0000000",  // AND
     "111"
 };
+
+// *** R_Type *** end *** //
+
+
+
+// *** I_Type *** begin *** //
+
+QVector <QString> I_Type_ISA_List = {"lb", "lh", "lw", "lbu", "lhu",
+                                    "addi", "slti", "sltiu", "xori", "ori", "andi",
+                                    "slli", "srli", "srai"};
+
+QVector <QString> I_Type_BitCode_List = {
+/*
+  Format
+  funct3   //Ins    //index
+*/
+    "000",  //LB    //0
+    "001",  //LH
+    "010",  //LW
+    "100",  //LBU
+    "101",  //LHU   //4
+
+    "000",  //ADDI  //5
+    "010",  //SLTI
+    "011",  //SLTIU
+    "100",  //XORI
+    "110",  //ORI
+    "111",   //ANDI  //10
+
+    "001",  //SLLI   //11
+    "101",  //SRLI
+    "101"   //SRAI   //13
+};
+
+// *** I_Type *** end *** //
+
+
+// *** S_Type *** begin *** //
+
+QVector <QString> S_Type_ISA_List = {"sb", "sh", "sw"};
+
+QVector <QString> S_Type_BitCode_List = {
+/*
+  Format
+  funct3   //Ins    //index
+*/
+    "000",  //SB
+    "001",  //SH
+    "010",  //SW
+};
+
+// *** I_Type *** end *** //
