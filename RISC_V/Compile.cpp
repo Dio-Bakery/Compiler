@@ -197,6 +197,8 @@ static QVector <QString> Decode_Type_I(QString Line)
 
 static QVector <QString> Decode_Type_S(QString Line)
 {
+
+
     QVector <QString>Bit_Code (Type_S_Ins_MAX);
     Bit_Code[S_opcode] = S_type_opcode;
 
@@ -218,15 +220,19 @@ static QVector <QString> Decode_Type_S(QString Line)
     Bit_Code[S_rs2] = Tmp.at(0).section(' ',1);
 
     QString S_imm11_0 = Tmp.at(1).section('(',0,0).remove(" ");
-
+/*
+    QByteArray byte = S_imm11_0.toUtf8();
+    char* str1 = byte.data();
+    cout << str1 <<endl;
+*/
     Bit_Code[S_rs1] = Tmp.at(1).section('(',1).section(")",0,0).remove(" ");
 
     Registor_Bit(Bit_Code[S_rs2]);
     Registor_Bit(Bit_Code[S_rs1]);
 
 
-    S_imm11_0 = QString::number(Bit_Code[I_imm11_0].toInt(),2);
-    S_imm11_0 = Imm_complement(Bit_Code[I_imm11_0],12);
+    S_imm11_0 = QString::number(S_imm11_0.toInt(),2);
+    S_imm11_0 = Imm_complement(S_imm11_0,12);
 
     Bit_Code[S_imm11_5] = S_imm11_0.left(7);
     Bit_Code[S_imm4_0]  = S_imm11_0.right(5);
@@ -343,13 +349,7 @@ int RISC_V_Compile(QString FilePath)
        uint32_t Content_Index = 0;
        for(int i = 0;i<Result_Code_List.size();i++)
        {
-          Compiled_file.write("\t");
-          Compiled_file.write(QString().number(Content_Index).toUtf8());
-          Compiled_file.write("     :   ");
-
           Compiled_file.write(Result_Code_List.at(i).toUtf8());
-
-          Compiled_file.write(";");
           Compiled_file.write("\n");
           Content_Index++;
        }

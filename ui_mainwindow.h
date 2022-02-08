@@ -11,11 +11,12 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,8 +26,12 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QPushButton *pushButton_SelectFile;
-    QTextEdit *File_to_compile;
     QPushButton *pushButton_Compile;
+    QPushButton *pushButton_toRamFile;
+    QLineEdit *RamFile;
+    QLineEdit *File_to_Compile;
+    QLabel *label;
+    QLabel *label_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -42,13 +47,25 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         pushButton_SelectFile = new QPushButton(centralwidget);
         pushButton_SelectFile->setObjectName(QString::fromUtf8("pushButton_SelectFile"));
-        pushButton_SelectFile->setGeometry(QRect(120, 160, 80, 20));
-        File_to_compile = new QTextEdit(centralwidget);
-        File_to_compile->setObjectName(QString::fromUtf8("File_to_compile"));
-        File_to_compile->setGeometry(QRect(70, 80, 521, 21));
+        pushButton_SelectFile->setGeometry(QRect(130, 160, 80, 20));
         pushButton_Compile = new QPushButton(centralwidget);
         pushButton_Compile->setObjectName(QString::fromUtf8("pushButton_Compile"));
-        pushButton_Compile->setGeometry(QRect(410, 160, 80, 20));
+        pushButton_Compile->setGeometry(QRect(400, 160, 80, 20));
+        pushButton_toRamFile = new QPushButton(centralwidget);
+        pushButton_toRamFile->setObjectName(QString::fromUtf8("pushButton_toRamFile"));
+        pushButton_toRamFile->setGeometry(QRect(260, 280, 121, 20));
+        RamFile = new QLineEdit(centralwidget);
+        RamFile->setObjectName(QString::fromUtf8("RamFile"));
+        RamFile->setGeometry(QRect(70, 230, 471, 20));
+        File_to_Compile = new QLineEdit(centralwidget);
+        File_to_Compile->setObjectName(QString::fromUtf8("File_to_Compile"));
+        File_to_Compile->setGeometry(QRect(60, 90, 471, 20));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(10, 90, 54, 12));
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(10, 230, 54, 12));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -67,12 +84,12 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButton_SelectFile->setText(QCoreApplication::translate("MainWindow", "\351\200\211\346\213\251\346\226\207\344\273\266", nullptr));
-        File_to_compile->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">D:/QuartusProject/RISC-V/AssemblyCode/Test_ISAfile.s</p></body></html>", nullptr));
         pushButton_Compile->setText(QCoreApplication::translate("MainWindow", "\347\274\226\350\257\221", nullptr));
+        pushButton_toRamFile->setText(QCoreApplication::translate("MainWindow", "\350\275\254\346\215\242\345\210\260RamFile", nullptr));
+        RamFile->setText(QCoreApplication::translate("MainWindow", "D:\\QuartusProject\\RISC-V\\AssemblyCode\\RamFile.mif", nullptr));
+        File_to_Compile->setText(QCoreApplication::translate("MainWindow", "D:/QuartusProject/RISC-V/AssemblyCode/Test_ISAfile.s", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "\346\272\220\346\226\207\344\273\266\357\274\232", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "RamFile:", nullptr));
     } // retranslateUi
 
 };

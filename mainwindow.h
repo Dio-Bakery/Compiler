@@ -26,7 +26,12 @@ private slots:
 
     void on_pushButton_Compile_clicked();
 
+    void on_pushButton_toRamFile_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+private:
+    bool is_Compile_OK;
 };
 #endif // MAINWINDOW_H
