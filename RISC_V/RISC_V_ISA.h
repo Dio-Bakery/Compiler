@@ -60,4 +60,21 @@ enum Type_S_Ins{
 // *** S_Type *** end *** //
 
 
+// *** B_Type *** begin *** //
+
+#define B_type_opcode "1100011" //b type define
+
+enum Type_B_Ins{
+    B_imm12__10_5,
+    B_rs2,
+    B_rs1,
+    B_funct3,
+    B_imm4_1__11,
+    B_opcode,
+    Type_B_Ins_MAX
+};
+
+// *** B_Type *** end *** //
+
+
 #endif // RISC_V_ISA_H

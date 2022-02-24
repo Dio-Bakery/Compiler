@@ -92,4 +92,24 @@ QVector <QString> S_Type_BitCode_List = {
     "010",  //SW
 };
 
-// *** I_Type *** end *** //
+// *** S_Type *** end *** //
+
+
+// *** B_Type *** begin *** //
+
+QVector <QString> B_Type_ISA_List = {"beq", "bne", "blt", "bge", "bltu", "bgeu"};
+
+QVector <QString> B_Type_BitCode_List = {
+/*
+  Format
+  funct3   //Ins
+*/
+    "000",  //BEQ
+    "001",  //BNE
+    "100",  //BLT
+    "101",  //BGE
+    "110",  //BLTU
+    "111",  //BGEU
+};
+
+// *** B_Type *** end *** //
