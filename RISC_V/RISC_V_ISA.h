@@ -8,6 +8,7 @@ enum Ins_Type{
     Type_I,
     Type_S,
     Type_B,
+    Type_U,
     NO_Type
 };
 
@@ -31,6 +32,7 @@ enum Type_R_Ins{
 
 #define I_type_opcode_1 "0000011" //I type define
 #define I_type_opcode_2 "0010011" //I type define
+#define I_type_opcode_jalr "1100111"
 
 enum Type_I_Ins{
     I_imm11_0,
@@ -76,5 +78,20 @@ enum Type_B_Ins{
 
 // *** B_Type *** end *** //
 
+
+// *** U_Type *** begin *** //
+
+#define U_type_opcode_lui "0110111"
+#define U_type_opcode_auipc "0010111"
+#define U_type_opcode_jal "1101111"
+
+enum Type_U_Ins{
+    U_imm31_12,
+    U_rd,
+    U_opcode,
+    Type_U_Ins_MAX
+};
+
+// *** U_Type *** end *** //
 
 #endif // RISC_V_ISA_H

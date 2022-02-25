@@ -13,9 +13,6 @@ extern QVector <QString> S_Type_BitCode_List;
 extern QVector <QString> B_Type_ISA_List;
 extern QVector <QString> B_Type_BitCode_List;
 
-extern QVector <QString> U_Type_ISA_List;
-extern QVector <QString> U_Type_BitCode_List;
-
 static Ins_Type Ins_Type(QString Instruction)
 {   // Yes : return the Type
     // No : return 0
@@ -33,9 +30,6 @@ static Ins_Type Ins_Type(QString Instruction)
 
     if(B_Type_ISA_List.contains(Ins))
         return Type_B;
-
-    if(U_Type_ISA_List.contains(Ins))
-        return Type_U;
     return NO_Type;
 }
 
@@ -160,12 +154,9 @@ static QVector <QString> Decode_Type_I(QString Line)
         Bit_Code[I_imm11_0] = Imm_complement(Bit_Code[I_imm11_0],12);
     }
     else
-    if(Index>=5 && Index<=14)
+    if(Index>=5 && Index<=13)
     {
-        if (Index == 6) // JALR
-            Bit_Code[I_opcode] = I_type_opcode_jalr;
-        else
-            Bit_Code[I_opcode] = I_type_opcode_2;
+        Bit_Code[I_opcode] = I_type_opcode_2;
 
         QStringList Tmp;
         Tmp = Line.split(',');
@@ -181,14 +172,13 @@ static QVector <QString> Decode_Type_I(QString Line)
         Registor_Bit(Bit_Code[I_rd]);
         Registor_Bit(Bit_Code[I_rs1]);
 
-        if(Index>=5 && Index<=11)
+        if(Index>=5 && Index<=10)
         {
             Bit_Code[I_imm11_0] = QString::number(Bit_Code[I_imm11_0].toInt(),2);
             Bit_Code[I_imm11_0] = Imm_complement(Bit_Code[I_imm11_0],12);
-
         }
         else
-        if(Index>=12 && Index<=14)
+        if(Index>=11 && Index<=13)
         {
             Bit_Code[I_imm11_0] = QString::number(Bit_Code[I_imm11_0].toUInt(),2);
             Bit_Code[I_imm11_0] = Imm_complement(Bit_Code[I_imm11_0],5);
@@ -279,6 +269,11 @@ static QVector <QString> Decode_Type_B(QString Line)
     Bit_Code[B_rs2] = QString(Tmp.at(1)).remove(" ");
 
     QString B_imm12_1 = QString(Tmp.at(2)).remove(" ");
+/*
+
+*/
+
+
 
     Registor_Bit(Bit_Code[B_rs1]);
     Registor_Bit(Bit_Code[B_rs2]);
@@ -289,50 +284,6 @@ static QVector <QString> Decode_Type_B(QString Line)
 
     Bit_Code[B_imm12__10_5] = B_imm12_1.mid(0,1) + B_imm12_1.mid(2,6);
     Bit_Code[B_imm4_1__11]  = B_imm12_1.mid(8,4) + B_imm12_1.mid(1,1);
-
-    return Bit_Code;
-}
-
-static QVector <QString> Decode_Type_U(QString Line)
-{
-
-    QVector <QString>Bit_Code (Type_U_Ins_MAX);
-
-
-    QString Instruction = Line.section(' ',0,0).toLower();
-
-    int Index = 0;
-
-    for(Index =0 ;Index < U_Type_ISA_List.size();Index++)
-    {
-        if(U_Type_ISA_List.at(Index)==Instruction){
-            Bit_Code[U_opcode] = U_Type_BitCode_List[Index];
-            break;
-        }
-    }
-
-    QStringList Tmp;
-    Tmp = Line.split(',');
-
-    Bit_Code[U_rd] = Tmp.at(0).section(' ',1);
-
-    if(Instruction == "lui" || Instruction == "auipc")
-    {
-      QString imm31_12 = QString(Tmp.at(1)).remove(" ");
-      imm31_12 = QString::number( imm31_12.toInt(),2);
-      Bit_Code[U_imm31_12]  = Imm_complement(imm31_12, 20);
-    }
-    else
-    if(Instruction == "jal")
-    {
-        QString imm20_1 = QString(Tmp.at(1)).remove(" ");
-        imm20_1 = QString::number(imm20_1.toInt() / 2,2);
-        Bit_Code[U_imm31_12] = imm20_1.mid(0,1) + imm20_1.mid(10,19) +imm20_1.mid(9,10) +imm20_1.mid(1,9);
-        Bit_Code[U_imm31_12]  = Imm_complement(Bit_Code[U_imm31_12], 20);
-    }
-
-
-    Registor_Bit(Bit_Code[U_rd]);
 
     return Bit_Code;
 }
@@ -370,10 +321,6 @@ static QString RISC_V_Compile_line(QString Line)
         break;
     case Type_B:
         Bit_Code = Decode_Type_B(Line);
-        break;
-    case Type_U:
-        Bit_Code = Decode_Type_U(Line);
-        break;
     default:
         break;
     }

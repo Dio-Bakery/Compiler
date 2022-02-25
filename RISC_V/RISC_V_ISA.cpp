@@ -49,7 +49,7 @@ QVector <QString> R_Type_BitCode_List = {
 // *** I_Type *** begin *** //
 
 QVector <QString> I_Type_ISA_List = {"lb", "lh", "lw", "lbu", "lhu",
-                                    "addi", "slti", "sltiu", "xori", "ori", "andi",
+                                    "addi", "jalr", "slti", "sltiu", "xori", "ori", "andi",
                                     "slli", "srli", "srai"};
 
 QVector <QString> I_Type_BitCode_List = {
@@ -61,18 +61,19 @@ QVector <QString> I_Type_BitCode_List = {
     "001",  //LH
     "010",  //LW
     "100",  //LBU
-    "101",  //LHU   //4
+    "101",  //LHU   //4   End_I_type_1
 
-    "000",  //ADDI  //5
+    "000",  //ADDI //5
+    "000",  //JALR // 6
     "010",  //SLTI
     "011",  //SLTIU
     "100",  //XORI
     "110",  //ORI
-    "111",   //ANDI  //10
+    "111",   //ANDI  //11  End_I_type_2
 
-    "001",  //SLLI   //11
+    "001",  //SLLI   //12
     "101",  //SRLI
-    "101"   //SRAI   //13
+    "101"   //SRAI   //14  End_I_type
 };
 
 // *** I_Type *** end *** //
@@ -113,3 +114,20 @@ QVector <QString> B_Type_BitCode_List = {
 };
 
 // *** B_Type *** end *** //
+
+// *** U_Type *** begin *** //
+
+QVector <QString> U_Type_ISA_List = {"lui", "auipc", "jal"};
+
+QVector <QString> U_Type_BitCode_List = {
+/*
+  Format
+  opcode   //Ins
+*/
+    U_type_opcode_lui,  // LUI
+    U_type_opcode_auipc, // AUIPC
+    U_type_opcode_jal,  // JAL
+};
+
+// *** U_Type *** end *** //
+
