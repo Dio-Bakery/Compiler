@@ -2,7 +2,7 @@
 
 // *** R_Type *** begin *** //
 
-QVector <QString> R_Type_ISA_List = {"add", "sub", "sll", "slt", "sltu", "xor", "srl", "sra", "or", "and"};
+QVector <QString> R_Type_ISA_List = {"add", "sub", "sll", "slt", "sltu", "xor", "srl", "sra", "or", "and","mul"};
 
 QVector <QString> R_Type_BitCode_List = {
 /*
@@ -39,7 +39,10 @@ QVector <QString> R_Type_BitCode_List = {
     "110",
 
     "0000000",  // AND
-    "111"
+    "111",
+
+    "0000001",  // MUL
+    "000",
 };
 
 // *** R_Type *** end *** //
