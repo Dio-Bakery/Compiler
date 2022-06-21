@@ -29,9 +29,9 @@ void MainWindow::on_pushButton_Compile_clicked()
     this->is_Compile_OK = RISC_V_Compile(FilePath);
 
     if(this->is_Compile_OK)
-        QMessageBox::about(this, tr("Comiled"), tr("Comiled OK"));
+        QMessageBox::about(this, tr("Compiled"), tr("Compiled OK"));
     else
-        QMessageBox::about(this, tr("Comiled"), tr("Error！"));
+        QMessageBox::about(this, tr("Compiled"), tr("Error！"));
 }
 
 

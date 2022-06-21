@@ -68,7 +68,11 @@ static QVector <QString> Decode_Type_R(QString Line)
     for(Index =0 ;Index < R_Type_ISA_List.size();Index++)
     {
         if(R_Type_ISA_List.at(Index)==Instruction)
+        {
+            QByteArray byte = Instruction.toUtf8();
+            char* str1 = byte.data();
             break;
+        }
     }
 
     Bit_Code[R_funct7] = R_Type_BitCode_List[Index*2];
